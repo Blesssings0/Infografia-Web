@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infografía: Ciberseguridad y Seguridad de la Información</title>
+    <!-- Importamos Tailwind CSS para estructura rápida -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Importamos Iconos de FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Fuentes de Google -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --neon-green: #00ff41;
+            --dark-bg: #0d0d0d;
+            --panel-bg: #1a1a1a;
+            --text-color: #e0e0e0;
+            --accent-blue: #00d4ff;
+            --accent-red: #ff2a6d;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--dark-bg);
+            color: var(--text-color);
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, .cyber-font {
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        /* Efectos visuales de fondo */
+        .grid-bg {
+            background-image: 
+                linear-gradient(rgba(0, 255, 65, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 255, 65, 0.03) 1px, transparent 1px);
+            background-size: 30px 30px;
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            z-index: -1;
+        }
+
+        /* Estilos de la Portada (Página 1 para PDF) */
+        .cover-page {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            border-bottom: 2px solid var(--neon-green);
+            page-break-after: always;
+            position: relative;
+        }
+
+        .scanline {
+            width: 100%;
+            height: 100px;
+            z-index: 10;
+            background: linear-gradient(0deg, rgba(0,0,0,0) 0%, rgba(0, 255, 65, 0.2) 50%, rgba(0,0,0,0) 100%);
+            opacity: 0.1;
+            position: absolute;
+            bottom: 100%;
+            animation: scanline 10s linear infinite;
+            pointer-events: none;
+        }
+
+        @keyframes scanline {
+            0% { bottom: 100%; }
+            100% { bottom: -100%; }
+        }
+
+        /* Tarjetas de Conceptos */
+        .concept-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-left: 4px solid var(--neon-green);
+            transition: transform 0.3s, box-shadow 0.3s;
+            backdrop-filter: blur(5px);
+        }
+
+        .concept-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 15px rgba(0, 255, 65, 0.3);
+        }
+
+        .concept-card.infosec { border-color: var(--accent-blue); }
+        .concept-card.inform { border-color: var(--accent-red); }
+
+        /* Diagrama de Pilares (CIA) */
+        .pillar-circle {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            font-weight: bold;
+            border: 2px solid;
+            margin: 0 auto;
+            position: relative;
+            background: var(--panel-bg);
+            z-index: 2;
+        }
+
+        /* Retos */
+        .challenge-item {
+            background: linear-gradient(45deg, #1a1a1a, #252525);
+            border: 1px solid #333;
+        }
+
+        /* Botón de impresión (oculto al imprimir) */
+        .print-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 100;
+            background: var(--neon-green);
+            color: black;
+            font-weight: bold;
+            padding: 10px 20px;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 0 10px var(--neon-green);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(0, 255, 65, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(0, 255, 65, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(0, 255, 65, 0); }
+        }
+
+        /* Ajustes específicos para IMPRESIÓN / PDF */
+        @media print {
+            body {
+                background-color: white !important;
+                color: black !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+            .grid-bg, .scanline, .print-btn {
+                display: none !important;
+            }
+            .cover-page {
+                border-bottom: none;
+                height: 100vh;
+            }
+            .concept-card, .challenge-item, .pillar-circle {
+                background: #f0f0f0 !important;
+                color: black !important;
+                box-shadow: none !important;
+                border: 1px solid #ccc !important;
+                break-inside: avoid;
+            }
+            h1, h2, h3 {
+                color: #000 !important;
+            }
+            .text-neon-green, .text-accent-blue, .text-accent-red {
+                color: #006600 !important; /* Oscurecer colores neón para papel */
+            }
+            a {
+                text-decoration: none;
+                color: black;
+            }
+            /* Forzar saltos de página */
+            .page-break {
+                page-break-before: always;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="grid-bg"></div>
+    <div class="scanline"></div>
+
+    <!-- Botón para generar PDF -->
+    <button onclick="window.print()" class="print-btn">
+        <i class="fas fa-file-pdf"></i> Guardar como PDF
+    </button>
+
+    <!-- PÁGINA 1: PORTADA -->
+    <header class="cover-page p-8">
+        <div class="max-w-4xl mx-auto border-4 border-green-500 p-10 rounded-lg relative">
+            <!-- Decorative corners -->
+            <div class="absolute top-0 left-0 w-4 h-4 bg-green-500"></div>
+            <div class="absolute top-0 right-0 w-4 h-4 bg-green-500"></div>
+            <div class="absolute bottom-0 left-0 w-4 h-4 bg-green-500"></div>
+            <div class="absolute bottom-0 right-0 w-4 h-4 bg-green-500"></div>
+
+            <i class="fas fa-shield-alt text-6xl mb-6 text-green-400"></i>
+            <h1 class="text-5xl md:text-7xl font-bold mb-4 uppercase tracking-wider text-green-400">Ciberseguridad</h1>
+            <h2 class="text-2xl md:text-3xl font-light mb-8 text-white">Fundamentos y Estrategias Digitales</h2>
+            
+            <div class="text-center inline-block mt-8 p-6 border-t border-gray-700">
+                <p class="text-xl mb-2"><strong class="text-green-400">Materia:</strong>Gestión de Riesgo</p>
+                <p class="text-xl mb-2"><strong class="text-green-400">Estudiante:</strong>Julio Antonio Solis</p>
+                <p class="text-xl mb-2"><strong class="text-green-400">Fecha:</strong> 05 de Febrero, 2026</p>
+                <p class="text-xl"><strong class="text-green-400">Actividad:</strong> Infografía y Análisis de Conceptos</p>
+            </div>
+        </div>
+    </header>
+
+    <!-- PÁGINA 2: RESEÑA Y CONTEXTO -->
+    <section class="max-w-6xl mx-auto p-8 page-break">
+        <div class="bg-gray-900 bg-opacity-80 p-8 rounded-xl border border-gray-700 mb-12">
+            <h2 class="text-3xl font-bold mb-4 text-green-400 border-b border-gray-700 pb-2">
+                <i class="fas fa-book-open mr-2"></i> Reseña de la Actividad
+            </h2>
+            <p class="text-lg leading-relaxed mb-4">
+                En la era digital actual, la protección de los datos ha dejado de ser una opción para convertirse en una necesidad crítica. Esta actividad tiene como objetivo desglosar y clarificar los conceptos fundamentales que sostienen la protección de nuestros activos digitales.
+            </p>
+            <p class="text-lg leading-relaxed">
+                A través de la siguiente infografía, exploraremos las diferencias sutiles pero vitales entre la <strong>Seguridad de la Información</strong> (el "qué" protegemos), la <strong>Seguridad Informática</strong> (las herramientas técnicas) y la <strong>Ciberseguridad</strong> (el entorno conectado). Analizaremos los tres pilares fundamentales (CID) que garantizan que la información sea útil y segura, y visualizaremos los retos emergentes como la Inteligencia Artificial ofensiva y el Ransomware.
+            </p>
+        </div>
+
+        <!-- INFOGRAFÍA: Título Visual -->
+        <div class="text-center mb-12">
+            <h2 class="text-4xl md:text-5xl cyber-font font-bold text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-blue-500">
+                ECOSYSTEM SECURITY MAP
+            </h2>
+            <p class="text-gray-400 mt-2">/// ANALIZANDO PROTOCOLOS DE DEFENSA ///</p>
+        </div>
+
+        <!-- SECCIÓN 1: DEFINICIONES Y DIFERENCIAS -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
+            <!-- Ciberseguridad -->
+            <div class="concept-card p-6 rounded-lg relative overflow-hidden group">
+                <div class="absolute right-0 top-0 opacity-10 text-9xl group-hover:scale-110 transition-transform">
+                    <i class="fas fa-globe"></i>
+                </div>
+                <h3 class="text-2xl font-bold mb-3 text-green-400">01. Ciberseguridad</h3>
+                <p class="text-sm text-gray-400 mb-2">PROTECCIÓN EN EL CIBERESPACIO</p>
+                <p>Es la práctica de defender computadoras, servidores, dispositivos móviles, sistemas electrónicos, redes y datos de ataques maliciosos. Se enfoca en la <strong>infraestructura conectada</strong>.</p>
+            </div>
+
+            <!-- Seguridad de la Información -->
+            <div class="concept-card infosec p-6 rounded-lg relative overflow-hidden group">
+                <div class="absolute right-0 top-0 opacity-10 text-9xl group-hover:scale-110 transition-transform">
+                    <i class="fas fa-file-contract"></i>
+                </div>
+                <h3 class="text-2xl font-bold mb-3 text-blue-400">02. Seg. Información</h3>
+                <p class="text-sm text-gray-400 mb-2">PROTECCIÓN DE ACTIVOS</p>
+                <p>Es el concepto más amplio ("paraguas"). Protege la información de riesgos, <strong>sea digital o física</strong> (papel). Su foco es el valor de los datos para la organización.</p>
+            </div>
+
+            <!-- Seguridad Informática -->
+            <div class="concept-card inform p-6 rounded-lg relative overflow-hidden group">
+                <div class="absolute right-0 top-0 opacity-10 text-9xl group-hover:scale-110 transition-transform">
+                    <i class="fas fa-server"></i>
+                </div>
+                <h3 class="text-2xl font-bold mb-3 text-pink-500">03. Seg. Informática</h3>
+                <p class="text-sm text-gray-400 mb-2">MEDIDAS TÉCNICAS</p>
+                <p>Se enfoca en las <strong>medidas técnicas y procesos</strong> para proteger los sistemas informáticos. Es la parte operativa y "táctica" de la protección.</p>
+            </div>
+        </div>
+
+        <!-- DIFERENCIA VISUAL -->
+        <div class="bg-gray-800 rounded-xl p-6 mb-16 border border-gray-600">
+            <h3 class="text-xl font-bold mb-4 text-center text-white"><i class="fas fa-balance-scale mr-2"></i> La Diferencia Clave</h3>
+            <div class="flex flex-col md:flex-row justify-around items-center text-center gap-4">
+                <div class="flex-1">
+                    <div class="text-blue-400 font-bold text-lg">Seg. Información</div>
+                    <div class="text-xs text-gray-400">¿Qué es valioso?</div>
+                    <div class="mt-2 text-sm">Protege el ACTIVO (Datos) en cualquier formato.</div>
+                </div>
+                <div class="text-2xl text-gray-500"><i class="fas fa-chevron-right"></i></div>
+                <div class="flex-1">
+                    <div class="text-green-400 font-bold text-lg">Ciberseguridad</div>
+                    <div class="text-xs text-gray-400">¿Dónde está?</div>
+                    <div class="mt-2 text-sm">Protege el MEDIO DIGITAL y las redes interconectadas.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECCIÓN 2: PILARES DE LA CIBERSEGURIDAD (CIA) -->
+        <div class="mb-16 page-break">
+            <h2 class="text-3xl cyber-font font-bold mb-8 text-center text-white border-b border-green-500 inline-block pb-2 px-10">
+                TRÍADA DE SEGURIDAD (C.I.D.)
+            </h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+                <!-- Confidencialidad -->
+                <div class="relative">
+                    <div class="pillar-circle border-green-500 text-green-400 shadow-[0_0_20px_rgba(0,255,65,0.4)]">
+                        <i class="fas fa-user-secret text-3xl mb-1"></i>
+                        CONFIDENCIALIDAD
+                    </div>
+                    <div class="mt-4 bg-gray-900 p-4 rounded border border-green-900">
+                        <p class="text-sm">Garantizar que la información <strong>solo sea accesible</strong> por personas autorizadas.</p>
+                        <p class="text-xs text-gray-500 mt-2">Ej: Encriptación, 2FA.</p>
+                    </div>
+                </div>
+
+                <!-- Integridad -->
+                <div class="relative">
+                    <div class="pillar-circle border-blue-500 text-blue-400 shadow-[0_0_20px_rgba(0,212,255,0.4)]">
+                        <i class="fas fa-fingerprint text-3xl mb-1"></i>
+                        INTEGRIDAD
+                    </div>
+                    <div class="mt-4 bg-gray-900 p-4 rounded border border-blue-900">
+                        <p class="text-sm">Asegurar que la información es <strong>exacta y no ha sido modificada</strong> sin autorización.</p>
+                        <p class="text-xs text-gray-500 mt-2">Ej: Checksums, Hashing.</p>
+                    </div>
+                </div>
+
+                <!-- Disponibilidad -->
+                <div class="relative">
+                    <div class="pillar-circle border-pink-500 text-pink-500 shadow-[0_0_20px_rgba(255,42,109,0.4)]">
+                        <i class="fas fa-clock text-3xl mb-1"></i>
+                        DISPONIBILIDAD
+                    </div>
+                    <div class="mt-4 bg-gray-900 p-4 rounded border border-pink-900">
+                        <p class="text-sm">Asegurar que los datos estén <strong>accesibles cuando se necesiten</strong>.</p>
+                        <p class="text-xs text-gray-500 mt-2">Ej: Backups, Redundancia.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECCIÓN 3: RETOS ACTUALES -->
+        <div class="mb-12">
+            <h2 class="text-3xl cyber-font font-bold mb-8 text-right text-red-500">
+                <i class="fas fa-exclamation-triangle"></i> RETOS Y AMENAZAS 2026
+            </h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="challenge-item p-4 rounded flex items-center gap-4">
+                    <div class="bg-red-500 text-black p-3 rounded font-bold">01</div>
+                    <div>
+                        <h4 class="font-bold text-red-400">Ransomware Evolucionado</h4>
+                        <p class="text-sm text-gray-300">Secuestro de datos con doble extorsión (cifrado + amenaza de publicación).</p>
+                    </div>
+                </div>
+
+                <div class="challenge-item p-4 rounded flex items-center gap-4">
+                    <div class="bg-red-500 text-black p-3 rounded font-bold">02</div>
+                    <div>
+                        <h4 class="font-bold text-red-400">Inteligencia Artificial (IA)</h4>
+                        <p class="text-sm text-gray-300">Uso de IA para crear phishing perfecto y malware adaptativo.</p>
+                    </div>
+                </div>
+
+                <div class="challenge-item p-4 rounded flex items-center gap-4">
+                    <div class="bg-red-500 text-black p-3 rounded font-bold">03</div>
+                    <div>
+                        <h4 class="font-bold text-red-400">Seguridad IoT</h4>
+                        <p class="text-sm text-gray-300">Millones de dispositivos conectados (cámaras, sensores) con seguridad débil por defecto.</p>
+                    </div>
+                </div>
+
+                <div class="challenge-item p-4 rounded flex items-center gap-4">
+                    <div class="bg-red-500 text-black p-3 rounded font-bold">04</div>
+                    <div>
+                        <h4 class="font-bold text-red-400">Brecha de Talento</h4>
+                        <p class="text-sm text-gray-300">Falta crítica de profesionales cualificados para defender infraestructuras.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- FOOTER / CRÉDITOS -->
+        <footer class="mt-16 pt-8 border-t border-gray-800 text-center text-gray-500 text-sm">
+            <p>Realizado por Julio Antonio Solis &copy;J.A.S2026</p>
+            <p class="mt-2 text-xs">Recursos: FontAwesome Icons, Google Fonts.</p>
+        </footer>
+
+    </section>
+
+    <script>
+        // Script simple para añadir interactividad de sonido simulada
+        // Nota: Los navegadores bloquean el autoplay, por lo que usamos efectos visuales en su lugar.
+        console.log("Sistema de Infografía Inicializado. Fecha: 05/02/2026");
+    </script>
+</body>
+</html>
